@@ -36,6 +36,9 @@ def get_unmatched_words(text1, text2):
     unmatched_words.extend(words2 - words1)
     return unmatched_words
 
+def calculate_similarity_ratio(text1, text2):
+    return fuzz.ratio(text1, text2)
+
 # Example usage
 text_file_path = 'chapter1.txt'
 transcribe_json_path = 'Ch1transcript.json'
@@ -52,3 +55,10 @@ transcribe_text = preprocess_text(transcribe_text)
 unmatched_words = get_unmatched_words(plain_text, transcribe_text)
 
 print("Unmatched Words:", unmatched_words)
+
+
+
+# Calculate similarity ratio
+similarity_ratio = calculate_similarity_ratio(plain_text, transcribe_text)
+print("Similarity Ratio:", similarity_ratio)
+
