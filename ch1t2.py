@@ -1,4 +1,11 @@
+'''
+# Example usage
+text_file_path = 'chapter1.txt'
+transcribe_json_path = 'Ch1transcript.json'
+
+'''
 import json
+import re
 from fuzzywuzzy import fuzz
 
 def read_text_file(file_path):
@@ -16,18 +23,18 @@ def read_transcribe_json(file_path):
     return transcribe_text.strip()
 
 def preprocess_text(text):
-    # Add preprocessing steps here if needed
+    # Remove specific symbols like "-", inverted commas, etc.
+    text = re.sub(r'[^\w\s]', ' ', text)
+    # Convert to lowercase
     return text.lower()
 
-def compare_text_files(text1, text2):
-    # Preprocess the text
-    text1 = preprocess_text(text1)
-    text2 = preprocess_text(text2)
-
-    # Compare the text using FuzzyWuzzy
-    similarity_score = fuzz.ratio(text1, text2)
-    
-    return similarity_score
+def get_unmatched_words(text1, text2):
+    unmatched_words = []
+    words1 = set(text1.split())
+    words2 = set(text2.split())
+    unmatched_words.extend(words1 - words2)
+    unmatched_words.extend(words2 - words1)
+    return unmatched_words
 
 # Example usage
 text_file_path = 'chapter1.txt'
@@ -37,6 +44,11 @@ transcribe_json_path = 'Ch1transcript.json'
 plain_text = read_text_file(text_file_path)
 transcribe_text = read_transcribe_json(transcribe_json_path)
 
-# Compare the text files
-similarity_score = compare_text_files(plain_text, transcribe_text)
-print("Similarity Score:", similarity_score)
+# Preprocess the text
+plain_text = preprocess_text(plain_text)
+transcribe_text = preprocess_text(transcribe_text)
+
+# Get unmatched words
+unmatched_words = get_unmatched_words(plain_text, transcribe_text)
+
+print("Unmatched Words:", unmatched_words)
