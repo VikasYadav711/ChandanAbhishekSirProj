@@ -36,8 +36,13 @@ def get_unmatched_words(text1, text2):
     unmatched_words.extend(words2 - words1)
     return unmatched_words
 
+#Similarity Ratio Function
 def calculate_similarity_ratio(text1, text2):
     return fuzz.ratio(text1, text2)
+
+def get_word_count(text):
+    # Count the number of words in the text
+    return len(text.split())
 
 # Example usage
 text_file_path = 'chapter1.txt'
@@ -61,4 +66,11 @@ print("Unmatched Words:", unmatched_words)
 # Calculate similarity ratio
 similarity_ratio = calculate_similarity_ratio(plain_text, transcribe_text)
 print("Similarity Ratio:", similarity_ratio)
+
+# Get word count for both texts
+word_count_plain_text = get_word_count(plain_text)
+word_count_transcribe_text = get_word_count(transcribe_text)
+
+print("No. of Words in Source File: ", word_count_plain_text)
+print("No. of words in transcibed File: ", word_count_transcribe_text)
 
