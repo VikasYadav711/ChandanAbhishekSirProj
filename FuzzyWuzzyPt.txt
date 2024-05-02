@@ -1,0 +1,6 @@
+1.besides fuzz.ratio(), the FuzzyWuzzy library provides several other functions that calculate similarity and return a percentage value:
+
+->fuzz.partial_ratio() - This function compares partial strings and returns a similarity ratio as a percentage.
+->fuzz.token_sort_ratio() - This function tokenizes the strings, sorts the tokens, and then compares them. It returns a similarity ratio as a percentage.
+->fuzz.token_set_ratio() - This function tokenizes the strings, removes duplicates, and then compares the tokens. It returns a similarity ratio as a percentage.
+fuzz.WRatio() - This function is similar to fuzz.ratio(), but it takes into account different weights for partial matches, tokens, and other factors. It also returns a similarity ratio as a percentage.
